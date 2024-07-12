@@ -16,7 +16,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             if (validKeys.includes(hashKeyInput)) {
                 window.location.href = 'sound.html';
             } else {
-                errorMessage.textContent = 'Incorrect HASH-KEY';
+                errorMessage.textContent = 'INCORRECT KEY... TRY AGAIN';
             }
         })
         .catch(error => {
