@@ -5,11 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUND</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Helvetica', sans-serif;
+            flex-direction: column;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 200px; /* Adjusted to your requirement */
+            height: 200px; /* Adjusted to your requirement */
+        }
+
+        #news-button {
+            background-color: transparent;
+            color: lightgrey;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Helvetica', sans-serif;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        #news-button:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="image-container">
-        <img src="sound.png" alt="Image" width="500" height="500">
+        <img src="sound.png" alt="Image">
     </div>
+    <button id="news-button">[ SEE NEWS PRESS ]</button>
     <script src="sound-script.js"></script>
+    <script>
+        // Show the button after 5 seconds
+        setTimeout(() => {
+            document.getElementById('news-button').style.display = 'block';
+        }, 4000);
+
+        // Redirect to sews.html when the button is clicked
+        document.getElementById('news-button').addEventListener('click', () => {
+            window.location.href = 'sews.html';
+        });
+    </script>
 </body>
 </html>
