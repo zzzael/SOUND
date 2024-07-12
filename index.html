@@ -9,11 +9,13 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>LOGIN</h1>
+        <h1 style="font-weight: bold;">LOGIN</h1>
         <form id="login-form">
-            <label for="hash-key">HASH-KEY:</label>
-            <input type="text" id="hash-key" name="hash-key" required>
-            <button type="submit">LOGIN</button>
+            <label for="hash-key" class="visually-hidden">ENTER KEY</label>
+            <div class="input-container">
+                <input type="text" id="hash-key" name="hash-key" placeholder="ENTER KEY" required>
+                <button type="submit" id="login-button">[ LOGIN ]</button>
+            </div>
             <p id="error-message"></p>
         </form>
     </div>
