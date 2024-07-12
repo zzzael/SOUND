@@ -9,6 +9,19 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.image-container {
+    text-align: center;
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+.image-container img {
+    width: 500px; /* Ensure the image width matches the specified size */
+    height: 500px; /* Ensure the image height matches the specified size */
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+
 .login-container {
     text-align: center;
 }
