@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.login-container, .sound-container {
+    text-align: center;
+}
+
+img {
+    width: 500px;
+    height: 500px;
+}
+
+#error-message {
+    color: red;
+}
