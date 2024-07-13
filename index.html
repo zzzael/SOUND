@@ -3,22 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUND</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-    <link rel="stylesheet" href="style.css">
+    <title>Loading</title>
+    <style>
+        body {
+            background-color: black;
+            color: rgb(100, 100, 100); /* Darker grey color */
+            font-family: 'Helvetica', sans-serif;
+            font-weight: 300; /* Light font */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: 700; /* Regular font weight */
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 18px;
+            font-weight: 300; /* Light font weight */
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 2px; /* Spacing between colons */
+        }
+        .countdown {
+            font-size: 36px;
+            font-weight: 300; /* Light font weight */
+            letter-spacing: 4px; /* Increased spacing between numbers */
+            text-align: center;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const countdownElement = document.getElementById('countdown');
+            const targetDate = new Date('July 16, 2024 15:00:00 GMT').getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                const days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+                const milliseconds = String(Math.floor((distance % 1000) / 10)).padStart(2, '0');
+
+                countdownElement.innerHTML = `${days} : ${hours} : ${minutes} : ${seconds} : ${milliseconds}`;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "The time has come!";
+                }
+            }
+
+            const interval = setInterval(updateCountdown, 10);
+            updateCountdown();
+        });
+    </script>
 </head>
 <body>
-    <div class="login-container">
-        <h1 style="font-weight: bold;">LOGIN</h1>
-        <form id="login-form">
-            <label for="hash-key" class="visually-hidden">ENTER KEY</label>
-            <div class="input-container">
-                <input type="text" id="hash-key" name="hash-key" placeholder="ENTER KEY" required>
-                <button type="submit" id="login-button">[ LOGIN ]</button>
-            </div>
-            <p id="error-message"></p>
-        </form>
+    <div class="content">
+        <div class="title">SOUND: JULY 16</div>
+        <div class="countdown" id="countdown"></div>
     </div>
-    <script src="./script.js"></script>
 </body>
 </html>
