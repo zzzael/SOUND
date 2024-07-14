@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Helvetica', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .catalogue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .catalogue-item {
+            text-align: center;
+        }
+        .catalogue-item img {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+        }
+        .catalogue-item .album-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .catalogue-item .price {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">SOUND UNRELEASED CATALOGUE</div>
+    <div class="catalogue-grid">
+        <div class="catalogue-item">
+            <a href="yandhi.html">
+                <img src="yandhi.gif" alt="Yandhi">
+            </a>
+            <div class="album-name">Yandhi</div>
+            <div class="price">$0.00</div>
+        </div>
+    </div>
+</body>
+</html>
