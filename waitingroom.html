@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiting Room</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .image-container img {
+            width: 200px; /* Changed size to 200x200 */
+            height: 200px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out; /* 2-second transition */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const img = document.querySelector('.image-container img');
+            let fadeOut = false;
+            setInterval(() => {
+                fadeOut = !fadeOut;
+                img.style.opacity = fadeOut ? 0 : 1;
+            }, 1000); /* 2-second interval for fade in and out */
+
+            setTimeout(() => {
+                window.location.href = 'catalogue.html';
+            }, 10000); /* 10-second wait before redirect */
+        });
+    </script>
+</head>
+<body>
+    <div class="image-container">
+        <img src="loadingwait.gif" alt="Loading">
+    </div>
+</body>
+</html>
