@@ -26,7 +26,7 @@
             text-align: center;
         }
         .catalogue-item img {
-            width: 300px; /* Resize to 300x300 */
+            width: 300px;
             height: 300px;
             cursor: pointer;
         }
@@ -44,7 +44,7 @@
     <div class="catalogue-container">
         <div class="catalogue-item">
             <a href="yandhi.html">
-                <img src="yandhii.gif" alt="Yandhi">
+                <img src="yandhi.gif" alt="Yandhi">
             </a>
             <div class="item-title">Yandhi</div>
             <div class="item-price">$0.00</div>
@@ -71,6 +71,18 @@
             <div class="item-price">$0.00</div>
         </div>
     </div>
+    <script>
+        // Check if the user is authenticated
+        if (localStorage.getItem('authenticated') !== 'true') {
+            // Redirect to login page if not authenticated
+            window.location.href = 'index.html';
+        }
+
+        // Reset authentication status when the user leaves the page
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('authenticated', 'false');
+        });
+    </script>
 </body>
 </html>
 

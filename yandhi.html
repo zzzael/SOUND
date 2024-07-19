@@ -7,7 +7,7 @@
     <style>
         body {
             background-color: black;
-            color: rgb(137, 137, 137); /* Lighter grey */
+            color: white;
             font-family: 'Helvetica', sans-serif;
             display: flex;
             align-items: center;
@@ -51,8 +51,21 @@
         </div>
         <div class="description">
             <p>Yandhi, Ye's infamous unreleased album which had inspired his future works with rumours of Yandhi songs being used in Vultures 2, and also used in other albums, (e.g: Hurricane, Brothers changed into Violent Crimes) is now formally known as Jesus Is King. Download the unreleased album and experience CD quality music here on SOUND.</p>
-            <a href="Yandhi.zip" class="download-button" download>DOWNLOAD</a>
+            <a href="https://www.dropbox.com/scl/fi/nnrhwdij189axmp12psuz/Yandhi.zip?rlkey=vzlndm7nzp64g9y31ov2yggrr&st=u3df0anv&dl=1" class="download-button" download>DOWNLOAD</a>
         </div>
     </div>
+    <script>
+        // Check if the user is authenticated
+        if (localStorage.getItem('authenticated') !== 'true') {
+            // Redirect to login page if not authenticated
+            window.location.href = 'index.html';
+        }
+
+        // Reset authentication status when the user leaves the page
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('authenticated', 'false');
+        });
+    </script>
 </body>
 </html>
+

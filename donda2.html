@@ -54,6 +54,18 @@
             <a href="https://www.dropbox.com/scl/fi/b6wk6ylfmuobfoqpnhuhz/Donda2.zip?rlkey=yjvwlqks8ft3v3m143zt51xri&st=qgj3dmsd&dl=1" class="download-button" download>DOWNLOAD</a>
         </div>
     </div>
+    <script>
+        // Check if the user is authenticated
+        if (localStorage.getItem('authenticated') !== 'true') {
+            // Redirect to login page if not authenticated
+            window.location.href = 'index.html';
+        }
+
+        // Reset authentication status when the user leaves the page
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('authenticated', 'false');
+        });
+    </script>
 </body>
 </html>
 
