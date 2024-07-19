@@ -71,7 +71,9 @@
             var correctPassword = 'zaeliscool'; // Correct password
 
             if (input === correctPassword) {
+                var currentTime = new Date().getTime();
                 localStorage.setItem('authenticated', 'true');
+                localStorage.setItem('loginTime', currentTime);
                 window.location.href = 'catalogue.html'; // Redirect to the catalogue page
             } else {
                 document.body.style.backgroundColor = 'black'; // Change background color to black
@@ -80,10 +82,6 @@
                     window.location.href = 'https://www.google.com'; // Redirect to Google
                 }, 2000); // Wait for 2 seconds
             }
-        });
-
-        window.addEventListener('beforeunload', function() {
-            localStorage.setItem('authenticated', 'false'); // Reset authentication status on tab close
         });
     </script>
 </body>
