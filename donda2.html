@@ -6,53 +6,54 @@
     <title>Donda 2</title>
     <style>
         body {
-            background-color: black;
-            color: rgb(137, 137, 137); /* Lighter grey */
+            background-color: rgb(235, 227, 227);
+            color: rgb(24, 24, 24);
             font-family: 'Helvetica', sans-serif;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
             padding: 20px;
-        }
-        .content {
-            display: flex;
-            align-items: center;
-        }
-        .image-container {
-            margin-right: 20px;
+            text-align: center;
         }
         .image-container img {
-            width: 500px; /* Size set to 500x500 */
-            height: 500px;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
         }
         .description {
-            max-width: 800px;
+            margin-top: 20px;
+            max-width: 500px;
         }
         .download-button {
-            display: block;
+            display: inline-block; /* Ensure button aligns properly */
             margin-top: 20px;
             font-size: 18px;
-            color: rgb(95, 95, 95); /* Lighter grey */
+            color: rgb(70, 70, 70);
             background: none;
             font-weight: 600;
-            border: none;
-            cursor: pointer;
+            border: 2px solid rgb(70, 70, 70); /* Optional: Add a border to the button */
+            border-radius: 5px; /* Optional: Add border radius for rounded corners */
+            padding: 10px 20px;
             text-decoration: none;
+            cursor: pointer;
             text-align: center;
+        }
+        .download-button:hover {
+            text-decoration: underline;
+            background-color: rgb(210, 210, 210); /* Optional: Change background on hover */
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <div class="image-container">
-            <img src="donda2.gif" alt="Donda 2">
-        </div>
-        <div class="description">
-            <p>Donda 2, the sequel to Ye's tenth studio album, Donda, carries forward the artistic vision with new and innovative sounds, executively produced by Future. Experience the unreleased tracks that continue the legacy of Donda, available now on SOUND.</p>
-            <a href="https://www.dropbox.com/scl/fi/b6wk6ylfmuobfoqpnhuhz/Donda2.zip?rlkey=yjvwlqks8ft3v3m143zt51xri&st=qgj3dmsd&dl=1" class="download-button" download>DOWNLOAD</a>
-        </div>
+    <div class="image-container">
+        <img src="donda2.gif" alt="Donda 2">
+    </div>
+    <div class="description">
+        <p>Donda 2 is Kanye West’s highly anticipated follow-up to Donda, offering an expanded and deeper exploration of his evolving sound. Discover this exclusive content on SOUND.</p>
+        <button class="download-button" onclick="downloadFile()">DOWNLOAD</button>
     </div>
     <script>
         function checkAuthentication() {
@@ -60,16 +61,25 @@
             var loginTime = parseInt(localStorage.getItem('loginTime'), 10);
             var currentTime = new Date().getTime();
             
-            if (authenticated !== 'true' || (currentTime - loginTime) > 300000) { // 300000ms = 5 minutes
+            if (authenticated !== 'true' || (currentTime - loginTime) > 300000) {
                 localStorage.removeItem('authenticated');
                 localStorage.removeItem('loginTime');
-                window.location.href = 'index.html'; // Redirect to login page
+                window.location.href = 'index.html';
             }
         }
 
-        // Call the function to check authentication status
+        function downloadFile() {
+            var url = 'https://www.dropbox.com/scl/fi/b6wk6ylfmuobfoqpnhuhz/Donda2.zip?rlkey=yjvwlqks8ft3v3m143zt51xri&st=m262da8d&dl=1';
+            
+            var newTab = window.open(url, '_blank');
+            
+            // Ensure the new tab is closed after a short delay to simulate a seamless experience
+            setTimeout(function() {
+                newTab.close();
+            }, 3000); // Adjust the timeout if needed
+        }
+        
         checkAuthentication();
     </script>
 </body>
 </html>
-

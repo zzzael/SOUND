@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yandhi</title>
+    <title>Vultures: Dropout Edition</title>
     <style>
         body {
             background-color: rgb(235, 227, 227);
@@ -28,32 +28,26 @@
             max-width: 500px;
         }
         .download-button {
-            display: inline-block; /* Ensure button aligns properly */
+            display: block;
             margin-top: 20px;
             font-size: 18px;
             color: rgb(70, 70, 70);
             background: none;
             font-weight: 600;
-            border: 2px solid rgb(70, 70, 70); /* Optional: Add a border to the button */
-            border-radius: 5px; /* Optional: Add border radius for rounded corners */
-            padding: 10px 20px;
-            text-decoration: none;
+            border: none;
             cursor: pointer;
+            text-decoration: none;
             text-align: center;
-        }
-        .download-button:hover {
-            text-decoration: underline;
-            background-color: rgb(210, 210, 210); /* Optional: Change background on hover */
         }
     </style>
 </head>
 <body>
     <div class="image-container">
-        <img src="yandhii.gif" alt="Yandhi">
+        <img src="vultdropout.gif" alt="Vultures: Dropout Edition">
     </div>
     <div class="description">
-        <p>Yandhi was an anticipated album by Kanye West that never officially released. This unreleased content provides an intriguing look into Ye’s creative journey. Download it now from SOUND.</p>
-        <button class="download-button" onclick="downloadFile()">DOWNLOAD</button>
+        <p>After an interesting turnout from VULTURES 1, some fans of the artist Ye have taken it upon themselves to create a dropout version with new production and new beats with an old 2000's vibe, excluding Ye's controversial comments in 2022. Experience it here on SOUND for free and organized.</p>
+        <a href="https://www.dropbox.com/scl/fi/w42djx6w8j50m4lwd1zfc/vulturesdropout.zip?rlkey=eui9a49xe0mjbcydi8kiclnbi&st=algigbnq&dl=1" class="download-button" download>DOWNLOAD</a>
     </div>
     <script>
         function checkAuthentication() {
@@ -67,18 +61,6 @@
                 window.location.href = 'index.html';
             }
         }
-
-        function downloadFile() {
-            var url = 'https://www.dropbox.com/scl/fi/nnrhwdij189axmp12psuz/Yandhi.zip?rlkey=vzlndm7nzp64g9y31ov2yggrr&st=vm3yp5s9&dl=1';
-            
-            var newTab = window.open(url, '_blank');
-            
-            // Ensure the new tab is closed after a short delay to simulate a seamless experience
-            setTimeout(function() {
-                newTab.close();
-            }, 3000); // Adjust the timeout if needed
-        }
-        
         checkAuthentication();
     </script>
 </body>

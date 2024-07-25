@@ -4,50 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUND</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <style>
         body {
-            background-color: black;
-            color: white;
-            font-family: 'Inter', sans-serif;
+            background-color: rgb(235, 227, 227);
+            color: rgb(24, 24, 24);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            padding: 20px;
+            font-family: 'Helvetica', sans-serif;
         }
+
+        .image-container {
+            text-align: center;
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+
+        .image-container img {
+            width: 500px; /* Ensure the image width matches the specified size */
+            height: 500px; /* Ensure the image height matches the specified size */
+            display: block;
+            margin: 0 auto; /* Center the image horizontally */
+        }
+
         .login-container {
             text-align: center;
         }
+
+        #login-form {
+            display: inline-block;
+            text-align: center;
+        }
+
         .input-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: inline-block;
+            position: relative;
         }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 10px;
+
+        #hash-key {
             border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: white;
-        }
-        button {
-            padding: 10px;
+            background-color: transparent;
+            outline: none;
+            color: rgb(24, 24, 24); /* Text color */
+            font-family: 'Helvetica', sans-serif;
             font-size: 16px;
-            margin-top: 10px;
-            background-color: grey;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
             font-weight: bold;
+            padding: 10px;
+            width: 200px;
+            text-align: center; /* Center text horizontally */
         }
-        p {
-            color: red;
-            display: none;
+
+        #hash-key::placeholder {
+            color: rgb(102, 102, 102); /* Placeholder color */
+            text-align: center; /* Center placeholder text horizontally */
+        }
+
+        #error-message {
+            color: rgb(83, 82, 82); /* Light grey color for error message */
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px; /* Space above error message */
+        }
+
+        #login-button {
+            background-color: transparent;
+            color: rgb(24, 24, 24);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Helvetica', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto 0; /* Center button vertically under input */
+        }
+
+        #login-button:hover {
+            text-decoration: underline;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
     </style>
 </head>
@@ -60,7 +105,6 @@
                 <input type="text" id="hash-key" name="hash-key" placeholder="ENTER KEY" required>
                 <button type="submit" id="login-button">[ LOGIN ]</button>
             </div>
-            <p id="error-message">Incorrect Password</p>
         </form>
     </div>
     <script>
@@ -68,15 +112,15 @@
             event.preventDefault(); // Prevent the form from submitting normally
 
             var input = document.getElementById('hash-key').value;
-            var correctPassword = 'SOUND_DROP_1'; // Correct password
+            var correctPassword = 'SOUND'; // Correct password
 
             if (input === correctPassword) {
-                var currentTime = new Date().getTime();
                 localStorage.setItem('authenticated', 'true');
-                localStorage.setItem('loginTime', currentTime);
+                var loginTime = new Date().getTime();
+                localStorage.setItem('loginTime', loginTime);
                 window.location.href = 'catalogue.html'; // Redirect to the catalogue page
             } else {
-                document.body.style.backgroundColor = 'black'; // Change background color to black
+                document.body.style.backgroundColor = 'rgb(212, 204, 204)'; // Change background color to white
                 document.body.innerHTML = ''; // Clear all content
                 setTimeout(function() {
                     window.location.href = 'https://www.google.com'; // Redirect to Google
@@ -86,4 +130,3 @@
     </script>
 </body>
 </html>
-
