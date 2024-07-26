@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUND</title>
+    <meta property="og:title" content="SOUND">
+    <meta property="og:description" content="SOUND is a website where unreleased music is stored for free with stem splitting features.">
+    <meta property="og:image" content="https://zzzael.github.io/sound/promo.jpg">
+    <meta property="og:url" content="https://zzzael.github.io/sound/">
+    <meta property="og:type" content="website">
     <style>
         body {
             background-color: rgb(235, 227, 227);
@@ -50,17 +55,18 @@
 
     <script>
         function updateTimer() {
-            const targetDate = new Date('July 27, 2024 00:00:00').getTime();
+            const targetDate = new Date('July 27, 2024 19:00:00').getTime();
             const now = new Date().getTime();
             const timeLeft = targetDate - now;
 
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
             const milliseconds = Math.floor((timeLeft % 1000) / 10);
 
             document.getElementById('timer').innerHTML = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`;
+                `${days}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`;
         }
 
         setInterval(updateTimer, 10);
