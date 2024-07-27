@@ -4,72 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUND</title>
-    <meta property="og:title" content="SOUND">
-    <meta property="og:description" content="SOUND is a website where unreleased music is stored for free with stem splitting features.">
-    <meta property="og:image" content="https://zzzael.github.io/sound/promo.jpg">
-    <meta property="og:url" content="https://zzzael.github.io/sound/">
-    <meta property="og:type" content="website">
     <style>
         body {
             background-color: rgb(235, 227, 227);
             color: rgb(24, 24, 24);
-            font-family: 'Helvetica', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            flex-direction: column;
-            position: relative;
+            font-family: 'Helvetica', sans-serif;
         }
 
         .image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
+            text-align: center;
+            margin-top: 20px; /* Adjust margin as needed */
         }
 
         .image-container img {
-            width: 500px;
-            height: 500px;
+            width: 500px; /* Ensure the image width matches the specified size */
+            height: 500px; /* Ensure the image height matches the specified size */
+            display: block;
+            margin: 0 auto; /* Center the image horizontally */
         }
 
-        .timer {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
+        .login-container {
+            text-align: center;
+        }
+
+        #login-form {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .input-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        #hash-key {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            color: rgb(24, 24, 24); /* Text color */
             font-family: 'Helvetica', sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 2px; /* Space out colons */
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            width: 200px;
+            text-align: center; /* Center text horizontally */
+        }
+
+        #hash-key::placeholder {
+            color: rgb(102, 102, 102); /* Placeholder color */
+            text-align: center; /* Center placeholder text horizontally */
+        }
+
+        #error-message {
+            color: rgb(83, 82, 82); /* Light grey color for error message */
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px; /* Space above error message */
+        }
+
+        #login-button {
+            background-color: transparent;
+            color: rgb(24, 24, 24);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Helvetica', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto 0; /* Center button vertically under input */
+        }
+
+        #login-button:hover {
+            text-decoration: underline;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
     </style>
 </head>
 <body>
-    <div class="image-container">
-        <img src="promo.jpg" alt="PROMO">
+    <div class="login-container">
+        <h1 style="font-weight: bold;">LOGIN</h1>
+        <form id="login-form">
+            <label for="hash-key" class="visually-hidden">ENTER KEY</label>
+            <div class="input-container">
+                <input type="text" id="hash-key" name="hash-key" placeholder="ENTER KEY" required>
+                <button type="submit" id="login-button">[ LOGIN ]</button>
+            </div>
+        </form>
     </div>
-    <div class="timer" id="timer"></div>
-
     <script>
-        function updateTimer() {
-            const targetDate = new Date('July 27, 2024 22:00:00').getTime();
-            const now = new Date().getTime();
-            const timeLeft = targetDate - now;
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
 
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            const milliseconds = Math.floor((timeLeft % 1000) / 10);
+            var input = document.getElementById('hash-key').value;
+            var correctPassword = 'SOUND'; // Correct password for catalogue
+            var stemPassword = 'SPLITMYSTEM'; // Correct password for stemming
 
-            document.getElementById('timer').innerHTML = 
-                `${days}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`;
-        }
-
-        setInterval(updateTimer, 10);
+            if (input === correctPassword) {
+                localStorage.setItem('authenticated', 'true');
+                var loginTime = new Date().getTime();
+                localStorage.setItem('loginTime', loginTime);
+                window.location.href = 'catalogue.html'; // Redirect to the catalogue page
+            } else if (input === stemPassword) {
+                localStorage.setItem('authenticated', 'true');
+                var loginTime = new Date().getTime();
+                localStorage.setItem('loginTime', loginTime);
+                window.location.href = 'stem.html'; // Redirect to the stemming page
+            } else {
+                document.body.style.backgroundColor = 'rgb(212, 204, 204)'; // Change background color to white
+                document.body.innerHTML = ''; // Clear all content
+                setTimeout(function() {
+                    window.location.href = 'https://www.google.com'; // Redirect to Google
+                }, 2000); // Wait for 2 seconds
+            }
+        });
     </script>
 </body>
 </html>
