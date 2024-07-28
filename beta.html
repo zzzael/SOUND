@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stemming</title>
-    <meta property="og:title" content="SOUND STEM">
-    <meta property="og:description" content="PLAY SPLIT MUSIC">
-    <meta property="og:image" content="https://zzzael.github.io/sound/promlarge.jpg">
-    <meta property="og:image:width" content="1000">
-    <meta property="og:image:height" content="600">  
-    <meta property="og:url" content="https://zzzael.github.io/sound/stem">
-    <meta property="og:type" content="website">
+    <title>STEM SOUND</title>
     <style>
         body {
             background-color: rgb(235, 227, 227);
@@ -131,35 +124,25 @@
             font-weight: 300;
             color: rgb(70, 70, 70);
         }
-
-        .top-left-text {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 16px;
-            font-weight: 600;
-            color: rgb(70, 70, 70);
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <h1>STEM SOUND</h1>
     <div class="file-input-container">
-        <label class="file-input-label" id="vocals-label">
-            INSERT VOCALS
+        <label class="file-input-label">
+            [ INSERT VOCALS ]
             <input type="file" id="vocals-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label><br>
-        <label class="file-input-label" id="drums-label">
-            INSERT DRUMS
+        <label class="file-input-label">
+            [ INSERT DRUMS ]
             <input type="file" id="drums-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label><br>
-        <label class="file-input-label" id="instruments-label">
-            INSERT BASS/INSTRUMENTS
+        <label class="file-input-label">
+            [ INSERT PIANO/INSTRUMENTS ]
             <input type="file" id="instruments-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label><br>
-        <label class="file-input-label" id="other-label">
-            INSERT OTHER
+        <label class="file-input-label">
+            [ INSERT OTHER ]
             <input type="file" id="other-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label>
     </div>
@@ -174,7 +157,7 @@
             <input type="range" min="0" max="100" value="100" class="slider" id="drums-slider">
         </div>
         <div class="slider-container">
-            <label class="slider-label" for="instruments-slider">BASS/INSTRUMENTS: <span id="instruments-volume">100</span>%</label>
+            <label class="slider-label" for="instruments-slider">PIANO/INSTRUMENTS: <span id="instruments-volume">100</span>%</label>
             <input type="range" min="0" max="100" value="100" class="slider" id="instruments-slider">
         </div>
         <div class="slider-container">
@@ -186,20 +169,15 @@
     </div>
 
     <button id="submit-button" class="button hidden">[ SUBMIT ]</button>
+    <button id="reload-button" class="button">[ RELOAD ]</button>
 
     <div class="bottom-text">SOUND WILL SUPPORT AI STEM SPLITTING IN LATE 2024</div>
-    <div class="top-left-text" id="reload-button">[ RELOAD ]</div>
 
     <script>
         const vocalsUpload = document.getElementById('vocals-upload');
         const drumsUpload = document.getElementById('drums-upload');
         const instrumentsUpload = document.getElementById('instruments-upload');
         const otherUpload = document.getElementById('other-upload');
-
-        const vocalsLabel = document.getElementById('vocals-label');
-        const drumsLabel = document.getElementById('drums-label');
-        const instrumentsLabel = document.getElementById('instruments-label');
-        const otherLabel = document.getElementById('other-label');
 
         const playButton = document.getElementById('play-button');
         const pauseButton = document.getElementById('pause-button');
@@ -221,38 +199,36 @@
         function checkUploads() {
             if (vocalsUpload.files.length && drumsUpload.files.length && instrumentsUpload.files.length && otherUpload.files.length) {
                 submitButton.classList.remove('hidden');
-                updateLabels();
             }
         }
 
-        function updateLabels() {
-            if (vocalsUpload.files.length) {
-                vocalsLabel.textContent = vocalsUpload.files[0].name;
-            }
-            if (drumsUpload.files.length) {
-                drumsLabel.textContent = drumsUpload.files[0].name;
-            }
-            if (instrumentsUpload.files.length) {
-                instrumentsLabel.textContent = instrumentsUpload.files[0].name;
-            }
-            if (otherUpload.files.length) {
-                otherLabel.textContent = otherUpload.files[0].name;
-            }
-        }
+        vocalsUpload.addEventListener('change', () => {
+            document.querySelector('label[for="vocals-upload"]').textContent = `[ ${vocalsUpload.files[0].name} ]`;
+            checkUploads();
+        });
 
-        vocalsUpload.addEventListener('change', checkUploads);
-        drumsUpload.addEventListener('change', checkUploads);
-        instrumentsUpload.addEventListener('change', checkUploads);
-        otherUpload.addEventListener('change', checkUploads);
+        drumsUpload.addEventListener('change', () => {
+            document.querySelector('label[for="drums-upload"]').textContent = `[ ${drumsUpload.files[0].name} ]`;
+            checkUploads();
+        });
+
+        instrumentsUpload.addEventListener('change', () => {
+            document.querySelector('label[for="instruments-upload"]').textContent = `[ ${instrumentsUpload.files[0].name} ]`;
+            checkUploads();
+        });
+
+        otherUpload.addEventListener('change', () => {
+            document.querySelector('label[for="other-upload"]').textContent = `[ ${otherUpload.files[0].name} ]`;
+            checkUploads();
+        });
 
         submitButton.addEventListener('click', () => {
             submitButton.textContent = '[ LOADING STEMS ]';
             setTimeout(() => {
-                submitButton.classList.add('hidden');
                 document.getElementById('sliders-container').classList.remove('hidden');
+                submitButton.classList.add('hidden');
                 playButton.classList.remove('hidden');
                 pauseButton.classList.remove('hidden');
-                submitButton.textContent = '[ SUBMIT ]';
             }, 4000);
         });
 
