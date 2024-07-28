@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stemming</title>
+    <title>STEM SOUND</title>
     <style>
         body {
             background-color: rgb(235, 227, 227);
@@ -125,14 +125,18 @@
             color: rgb(70, 70, 70);
         }
 
-        .top-left-text {
+        .reload-button {
             position: absolute;
             top: 20px;
             left: 20px;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
             color: rgb(70, 70, 70);
+            background: none;
+            font-weight: 600;
+            border: none;
             cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -140,22 +144,24 @@
     <h1>STEM SOUND</h1>
     <div class="file-input-container">
         <label class="file-input-label" id="vocals-label">
-            INSERT VOCALS
+            [ INSERT VOCALS ]
             <input type="file" id="vocals-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label><br>
         <label class="file-input-label" id="drums-label">
-            INSERT DRUMS
+            [ INSERT DRUMS ]
             <input type="file" id="drums-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label><br>
         <label class="file-input-label" id="instruments-label">
-            INSERT PIANO/INSTRUMENTS
+            [ INSERT PIANO/INSTRUMENTS ]
             <input type="file" id="instruments-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label><br>
         <label class="file-input-label" id="other-label">
-            INSERT OTHER
+            [ INSERT OTHER ]
             <input type="file" id="other-upload" class="file-input" accept="audio/mp3, audio/wav">
         </label>
     </div>
+
+    <button id="submit-button" class="button hidden">[ SUBMIT ]</button>
 
     <div id="sliders-container" class="hidden">
         <div class="slider-container">
@@ -178,10 +184,9 @@
         <button id="pause-button" class="button hidden">[ PAUSE ]</button>
     </div>
 
-    <button id="submit-button" class="button hidden">[ SUBMIT ]</button>
+    <button class="reload-button" onclick="window.location.reload()">[ RELOAD ]</button>
 
     <div class="bottom-text">SOUND WILL SUPPORT AI STEM SPLITTING IN LATE 2024</div>
-    <div class="top-left-text" id="reload-button">[ RELOAD ]</div>
 
     <script>
         const vocalsUpload = document.getElementById('vocals-upload');
@@ -194,10 +199,10 @@
         const instrumentsLabel = document.getElementById('instruments-label');
         const otherLabel = document.getElementById('other-label');
 
+        const submitButton = document.getElementById('submit-button');
+        const slidersContainer = document.getElementById('sliders-container');
         const playButton = document.getElementById('play-button');
         const pauseButton = document.getElementById('pause-button');
-        const submitButton = document.getElementById('submit-button');
-        const reloadButton = document.getElementById('reload-button');
 
         const vocalsSlider = document.getElementById('vocals-slider');
         const drumsSlider = document.getElementById('drums-slider');
@@ -212,24 +217,20 @@
         let vocalsAudio, drumsAudio, instrumentsAudio, otherAudio;
 
         function checkUploads() {
-            if (vocalsUpload.files.length && drumsUpload.files.length && instrumentsUpload.files.length && otherUpload.files.length) {
-                submitButton.classList.remove('hidden');
-                updateLabels();
-            }
-        }
-
-        function updateLabels() {
             if (vocalsUpload.files.length) {
-                vocalsLabel.textContent = vocalsUpload.files[0].name;
+                vocalsLabel.textContent = `[ ${vocalsUpload.files[0].name} ]`;
             }
             if (drumsUpload.files.length) {
-                drumsLabel.textContent = drumsUpload.files[0].name;
+                drumsLabel.textContent = `[ ${drumsUpload.files[0].name} ]`;
             }
             if (instrumentsUpload.files.length) {
-                instrumentsLabel.textContent = instrumentsUpload.files[0].name;
+                instrumentsLabel.textContent = `[ ${instrumentsUpload.files[0].name} ]`;
             }
             if (otherUpload.files.length) {
-                otherLabel.textContent = otherUpload.files[0].name;
+                otherLabel.textContent = `[ ${otherUpload.files[0].name} ]`;
+            }
+            if (vocalsUpload.files.length && drumsUpload.files.length && instrumentsUpload.files.length && otherUpload.files.length) {
+                submitButton.classList.remove('hidden');
             }
         }
 
@@ -242,10 +243,9 @@
             submitButton.textContent = '[ LOADING STEMS ]';
             setTimeout(() => {
                 submitButton.classList.add('hidden');
-                document.getElementById('sliders-container').classList.remove('hidden');
+                slidersContainer.classList.remove('hidden');
                 playButton.classList.remove('hidden');
                 pauseButton.classList.remove('hidden');
-                submitButton.textContent = '[ SUBMIT ]';
             }, 4000);
         });
 
@@ -309,24 +309,16 @@
             otherAudio = createAudioElement(otherUpload.files[0]);
         });
 
-        reloadButton.addEventListener('click', () => {
-            location.reload();
-        });
-
         function checkAuthentication() {
             var authenticated = localStorage.getItem('authenticated');
-            var loginTime = parseInt(localStorage.getItem('loginTime'), 10);
+            var loginTime = parseInt(localStorage.getItem('loginTime'));
             var currentTime = new Date().getTime();
-            
-            if (authenticated !== 'true' || (currentTime - loginTime) > 300000) { // 300000ms = 5 minutes
-                localStorage.removeItem('authenticated');
-                localStorage.removeItem('loginTime');
-                window.location.href = 'index.html'; // Redirect to login page
+            if (!authenticated || currentTime - loginTime > 24 * 60 * 60 * 1000) {
+                window.location.href = '/login';
             }
         }
 
-        // Call the function to check authentication status
-        checkAuthentication();
+        window.onload = checkAuthentication;
     </script>
 </body>
 </html>
