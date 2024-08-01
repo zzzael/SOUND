@@ -3,136 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUND</title>
+    <title>Document</title>
     <style>
+        /* Importing local SF Pro font */
+        @font-face {
+            font-family: 'SF Pro';
+            src: url('sfpro.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
-            background-color: rgb(235, 227, 227);
-            color: rgb(24, 24, 24);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'SF Pro', sans-serif;
+            background-color: #f0f0f0; /* Adjust as needed */
             margin: 0;
-            font-family: 'Helvetica', sans-serif;
-        }
-
-        .image-container {
-            text-align: center;
-            margin-top: 20px; /* Adjust margin as needed */
-        }
-
-        .image-container img {
-            width: 500px; /* Ensure the image width matches the specified size */
-            height: 500px; /* Ensure the image height matches the specified size */
-            display: block;
-            margin: 0 auto; /* Center the image horizontally */
-        }
-
-        .login-container {
-            text-align: center;
-        }
-
-        #login-form {
-            display: inline-block;
-            text-align: center;
-        }
-
-        .input-container {
-            display: inline-block;
-            position: relative;
-        }
-
-        #hash-key {
-            border: none;
-            background-color: transparent;
-            outline: none;
-            color: rgb(24, 24, 24); /* Text color */
-            font-family: 'Helvetica', sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 10px;
-            width: 200px;
-            text-align: center; /* Center text horizontally */
-        }
-
-        #hash-key::placeholder {
-            color: rgb(102, 102, 102); /* Placeholder color */
-            text-align: center; /* Center placeholder text horizontally */
-        }
-
-        #error-message {
-            color: rgb(83, 82, 82); /* Light grey color for error message */
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10px; /* Space above error message */
-        }
-
-        #login-button {
-            background-color: transparent;
-            color: rgb(24, 24, 24);
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-family: 'Helvetica', sans-serif;
-            font-weight: bold;
-            cursor: pointer;
-            display: block;
-            margin: 10px auto 0; /* Center button vertically under input */
-        }
-
-        #login-button:hover {
-            text-decoration: underline;
-        }
-
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
             padding: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
             overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
+        }
+
+        .date-time {
+            position: absolute;
+            top: 30px; /* Moved down */
+            left: 10px;
+            font-size: 13px; /* Smaller font size */
+            color: #000;
+        }
+
+        .message {
+            font-size: 13px; /* Smaller font size */
+            font-weight: 400;
+            text-align: left;
+            margin: 0;
+            padding-left: 20px; /* Space from the left edge */
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1 style="font-weight: bold;">LOGIN</h1>
-        <form id="login-form">
-            <label for="hash-key" class="visually-hidden">ENTER KEY</label>
-            <div class="input-container">
-                <input type="text" id="hash-key" name="hash-key" placeholder="ENTER KEY" required>
-                <button type="submit" id="login-button">[ LOGIN ]</button>
-            </div>
-        </form>
+    <div class="date-time" id="date-time">
+        <!-- Date and time will be inserted here by JavaScript -->
     </div>
+
+    <div class="message">
+        SOUND LISTENING EXPERIENCE AUGUST 2<br><br>
+        ARRIVING WITH NEW COLLABORATION
+    </div>
+
     <script>
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting normally
+        function formatDateTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2);
+            const month = String(now.getMonth() + 1).padStart(2, ''); // zael youre a retard dont use '0'
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const milliseconds = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0'); // Two-digit milliseconds
 
-            var input = document.getElementById('hash-key').value;
-            var correctPassword = 'SOUND'; // Correct password for catalogue
-            var stemPassword = 'SPLITMYSTEM'; // Correct password for stemming
+            return `${month} ${day} ${year}\n${hours}:${minutes}:${seconds}:${milliseconds}`;
+        }
 
-            if (input === correctPassword) {
-                localStorage.setItem('authenticated', 'true');
-                var loginTime = new Date().getTime();
-                localStorage.setItem('loginTime', loginTime);
-                window.location.href = 'catalogue.html'; // Redirect to the catalogue page
-            } else if (input === stemPassword) {
-                localStorage.setItem('authenticated', 'true');
-                var loginTime = new Date().getTime();
-                localStorage.setItem('loginTime', loginTime);
-                window.location.href = 'stems.html'; // Redirect to the stemming page
-            } else {
-                document.body.style.backgroundColor = 'rgb(212, 204, 204)'; // Change background color to white
-                document.body.innerHTML = ''; // Clear all content
-                setTimeout(function() {
-                    window.location.href = 'https://www.google.com'; // Redirect to Google
-                }, 2000); // Wait for 2 seconds
-            }
-        });
+        function updateDateTime() {
+            document.getElementById('date-time').textContent = formatDateTime();
+        }
+
+        // Update date and time immediately and then every millisecond
+        updateDateTime();
+        setInterval(updateDateTime, 1); // Update every millisecond for accurate time
     </script>
 </body>
 </html>
